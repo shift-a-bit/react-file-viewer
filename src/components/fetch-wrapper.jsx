@@ -62,6 +62,7 @@ function withFetching(WrappedComponent, props) {
 
       return xhr;
     }
+    }
 
     fetch() {
       this.xhr.send();
