@@ -29,17 +29,17 @@ function withFetching(WrappedComponent, props) {
     }
 
     createRequest(path) {
-      let xhr = new XMLHttpRequest();            
-      if(props.headers) {      
-        props.headers.map( (header)=> {
-        xhr.setRequestHeader(header.name, header.value);
-      })
+      let xhr = new XMLHttpRequest();                 
       if ('withCredentials' in xhr) {
         // XHR for Chrome/Firefox/Opera/Safari.
         xhr.open('GET', path, true);
       } else if (typeof XDomainRequest !== 'undefined') {
         // XDomainRequest for IE.
         xhr = new XDomainRequest();
+        if(props.headers) {      
+          props.headers.map( (header)=> {
+          xhr.setRequestHeader(header.name, header.value);
+        })
         xhr.open('GET', path);
       } else {
         // CORS not supported.
