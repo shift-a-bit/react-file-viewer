@@ -9,6 +9,11 @@ import Loading from '../loading';
 export default class extends Component {
   componentDidMount() {
     const jsonFile = new XMLHttpRequest();
+
+    if(this.props.headers) {      
+      this.props.headers.map( (header)=> {
+        jsonFile.setRequestHeader(header.name, header.value);
+    });
     jsonFile.open('GET', this.props.filePath, true);
     jsonFile.send();
     jsonFile.responseType = 'arraybuffer';

@@ -29,8 +29,11 @@ function withFetching(WrappedComponent, props) {
     }
 
     createRequest(path) {
-      let xhr = new XMLHttpRequest();
-
+      let xhr = new XMLHttpRequest();            
+      if(props.headers) {      
+        props.headers.map( (header)=> {
+        xhr.setRequestHeader(header.name, header.value);
+      })
       if ('withCredentials' in xhr) {
         // XHR for Chrome/Firefox/Opera/Safari.
         xhr.open('GET', path, true);

@@ -88,6 +88,7 @@ FileViewer.propTypes = {
   onError: PropTypes.func,
   errorComponent: PropTypes.element,
   unsupportedComponent: PropTypes.element,
+  headers: PropTypes.object.IsOptional
 };
 
 FileViewer.defaultProps = {
