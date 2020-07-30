@@ -35,12 +35,8 @@ function withFetching(WrappedComponent, props) {
         xhr.open('GET', path, true);
       } else if (typeof XDomainRequest !== 'undefined') {
         // XDomainRequest for IE.
-        xhr = new XDomainRequest();
-        if(props.headers) {      
-          props.headers.map( (header)=> {
-          xhr.setRequestHeader(header.name, header.value);
-        })
-        xhr.open('GET', path);
+        xhr = new XDomainRequest();       
+        xhr.open('GET', path);        
       } else {
         // CORS not supported.
         xhr = null;
@@ -50,6 +46,11 @@ function withFetching(WrappedComponent, props) {
         xhr.responseType = props.responseType;
       }
 
+      if(props.headers) {      
+        props.headers.map( (header)=> {
+        xhr.setRequestHeader(header.name, header.value);
+      })
+      
       xhr.onload = () => {
         if (xhr.status >= 400) {
           this.setState({ error: `fetch error with status ${xhr.status}` });
