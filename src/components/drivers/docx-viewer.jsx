@@ -14,6 +14,7 @@ export default class extends Component {
       this.props.headers.map( (header)=> {
         jsonFile.setRequestHeader(header.name, header.value);
     });
+  }
     jsonFile.open('GET', this.props.filePath, true);
     jsonFile.send();
     jsonFile.responseType = 'arraybuffer';
